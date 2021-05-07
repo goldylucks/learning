@@ -1,0 +1,19 @@
+FROM node:latest
+
+USER node
+
+RUN mkdir /home/node/code
+
+WORKDIR /home/node/code
+
+COPY --chown=node:node yarn.lock package.json ./
+
+RUN yarn
+
+COPY --chown=node:node . .
+
+# TODO
+# copy process from complete projects intro to containers
+# to serve from nginx
+
+CMD ["yarn", "dev:client"]
